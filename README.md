@@ -41,3 +41,7 @@ Visit /house-plan for the new sketch-based 2D and 3D Three.js views. Both modes 
 Confirmed room sizes: bedrooms 10 x 10 each; kitchen 10 x 10; porch 10 x 10; hall 12 x 16; cow house 12 x 25; old room 10 x 10; middle old house 30 x 15.
 
 The bungalow target is 1,100 sq ft including the porch. Its 22 x 50 footprint is an assumption, not a supplied outside measurement. A 264 sq ft unassigned area and provisional circulation reconcile the requested total with the specified rooms. Wall thickness, structural details, garden sizes, plot boundary, and exact openings still need measurements. Furniture is illustrative.
+
+### Photo references and exterior
+
+The Exterior mode uses the supplied street-level images for cream render, red bands and terrace parapets, metal rails, window grilles, sunshades, pipes, and raised garden beds. The reference gallery keeps the sketch and four original screenshots, including attribution. Heights, facade placements, roof forms on older structures, and vegetation remain illustrative; the aerial screenshot has not been georeferenced. Supplied floor dimensions and the provisional 1,100 sq ft envelope are unchanged.

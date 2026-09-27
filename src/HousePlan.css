@@ -69,3 +69,8 @@
 
 .hp-label small { display: block; font-size: 8px; font-weight: 400; color: #849078; margin-top: 2px; }
 @media(max-width:700px) { .hp-label small { font-size: 6px; } }
+
+.hp-reference-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 18px; }
+.hp-reference-tabs button { width: auto; font-size: 11px; padding: 8px 12px; color: #52604b; border: 1px solid #d4d8ca; border-radius: 6px; }
+.hp-reference-tabs button[aria-pressed=true] { background: #e2e9d8; border-color: #a4b28e; }
+.hp-modes button { padding: 10px 5px; font-size: 10px; white-space: nowrap; }

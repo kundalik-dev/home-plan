@@ -3,6 +3,7 @@ import { Canvas, useThree } from '@react-three/fiber'
 import { Html, Line, OrbitControls, OrthographicCamera } from '@react-three/drei'
 import { zones, walls, windows, doors, colors } from './housePlanData'
 import './HousePlan.css'
+import HouseExterior from './HouseExterior'
 
 function Box({ x, z, w, d, h, y=0, color, transparent=false }: { x:number; z:number; w:number; d:number; h:number; y?:number; color:string; transparent?:boolean }) {
   return <mesh position={[x-41,y+h/2,z-28]} castShadow receiveShadow><boxGeometry args={[w,h,d]} /><meshStandardMaterial color={color} roughness={0.8} transparent={transparent} opacity={transparent ? 0.5 : 1} /></mesh>
@@ -23,9 +24,9 @@ function Furniture() {
     <Box x={6} z={24} w={2.5} d={20} h={1} color="#b0a28b" />
   </group>
 }
-function Camera({ flat }: { flat:boolean }) {
+function Camera({ flat, exterior=false }: { flat:boolean; exterior?:boolean }) {
   const { width,height }=useThree(s=>s.size)
-  return <OrthographicCamera makeDefault position={flat ? [0,110,4.001] : [62,90,95]} zoom={Math.min(width/(flat?94:110),height/(flat?84:93))} near={0.1} far={400} />
+  return <OrthographicCamera makeDefault position={flat ? [0,110,4.001] : exterior ? [85,65,85] : [62,90,95]} zoom={Math.min(width/(flat?94:110),height/(flat?84:93))} near={0.1} far={400} />
 }
 function Scene({ flat, labels, furniture, roof, height, selected, select }: { flat:boolean; labels:boolean; furniture:boolean; roof:boolean; height:number; selected:string|null; select:(id:string)=>void }) {
   const [ready,setReady]=useState(false)
@@ -60,13 +61,27 @@ function Scene({ flat, labels, furniture, roof, height, selected, select }: { fl
     {ready&&<><Html center position={[-1,0.3,2]} zIndexRange={[20,0]}><span className="hp-courtyard">OPEN COURTYARD</span></Html><Html center position={[5,0.3,34]} zIndexRange={[20,0]}><span className="hp-entry">↑ MAIN ENTRY</span></Html></>}
   </group>
 }
+const references = [
+  { title: 'Layout sketch', src: '/house-sketch.png', caption: 'Your original layout drawing. Room dimensions were supplied separately.' },
+  { title: 'Garden corner', src: '/house-reference-1.png', caption: 'Raised garden beds, flowering plants, and mature trees. User-supplied Street View screenshot; original attribution retained.' },
+  { title: 'House exterior', src: '/house-reference-2.png', caption: 'Cream walls, red terrace parapets, railings, and courtyard context. User-supplied Street View screenshot.' },
+  { title: 'Side elevation', src: '/house-reference-3.png', caption: 'Red facade bands, grilled windows, sunshade, and downpipes. Exterior heights and placements in the model are approximate.' },
+  { title: 'Aerial context', src: '/house-reference-4.png', caption: 'General relationship of roofs and open courtyard. Image orientation and precise plot boundary have not been established.' },
+]
 function Sketch({close}:{close:()=>void}) {
   const ref=useRef<HTMLDialogElement>(null)
+  const [active,setActive]=useState(0)
   useEffect(()=>{const d=ref.current;d?.showModal();return()=>d?.close()},[])
-  return <dialog ref={ref} className="hp-dialog" onCancel={close} aria-label="Your original house sketch"><div><h2>Your original sketch</h2><button autoFocus onClick={close} aria-label="Close sketch">×</button></div><img src="/house-sketch.png" alt="Rough house sketch: existing buildings west and north, open courtyard, main residence east and L-shaped garden" /><p>Source sketch · room dimensions supplied separately</p></dialog>
+  const reference=references[active]
+  return <dialog ref={ref} className="hp-dialog" onCancel={close} aria-label="House reference gallery">
+    <div><h2>Your house references</h2><button autoFocus onClick={close} aria-label="Close references">×</button></div>
+    <nav className="hp-reference-tabs" aria-label="Choose reference">{references.map((item,i)=><button key={item.src} aria-pressed={active===i} onClick={()=>setActive(i)}>{item.title}</button>)}</nav>
+    <img src={reference.src} alt={reference.title + ': ' + reference.caption} />
+    <p>{reference.caption}</p>
+  </dialog>
 }
 export default function HousePlan() {
-  const [mode,setMode]=useState<'2d'|'3d'>('2d')
+  const [mode,setMode]=useState<'2d'|'3d'|'exterior'>('exterior')
   const [labels,setLabels]=useState(true)
   const [furniture,setFurniture]=useState(true)
   const [roof,setRoof]=useState(false)
@@ -76,36 +91,38 @@ export default function HousePlan() {
   const [sketch,setSketch]=useState(false)
   const zone=zones.find(z=>z.id===selected)
   return <div className="hp-page">
-    <header className="hp-header"><a href="/" className="hp-brand">THREE / LAB <span>RESIDENTIAL STUDIO</span></a><nav><a href="/floor-plan">Previous plan</a><button onClick={()=>setSketch(true)}>Original sketch ↗</button></nav></header>
+    <header className="hp-header"><a href="/" className="hp-brand">THREE / LAB <span>RESIDENTIAL STUDIO</span></a><nav><a href="/floor-plan">Previous plan</a><button onClick={()=>setSketch(true)}>References · 5 ↗</button></nav></header>
     <div className="hp-layout">
-      <aside className="hp-sidebar"><p className="hp-kicker">YOUR HOME, REIMAGINED</p><h1>One place.<br />Every perspective.</h1><p className="hp-intro">Your sketch, with measured rooms and a provisional 1,100 sq ft bungalow footprint.</p>
-        <div className="hp-status"><i /> CONCEPT 01 <span>FROM YOUR SKETCH</span></div>
-        <section><h2>Explore your plan</h2><div className="hp-modes"><button aria-pressed={mode==='2d'} onClick={()=>setMode('2d')}>▤ 2D plan</button><button aria-pressed={mode==='3d'} onClick={()=>setMode('3d')}>◇ 3D model</button></div>
-          <label>Space labels<input type="checkbox" checked={labels} onChange={e=>setLabels(e.target.checked)} /></label>
-          <label className={mode==='2d'?'muted':''}>Furniture <input type="checkbox" disabled={mode==='2d'} checked={furniture} onChange={e=>setFurniture(e.target.checked)} /></label>
-          <label className={mode==='2d'?'muted':''}>Show roofs<input type="checkbox" disabled={mode==='2d'} checked={roof} onChange={e=>setRoof(e.target.checked)} /></label>
-          <label htmlFor="hp-height" className={mode==='2d'?'muted':''}>Wall display height<span>{height===3?'Cutaway':height>3?'Tall':'Low'}</span></label><input id="hp-height" aria-label="Wall display height" type="range" min="1" max="7" step="0.5" disabled={mode==='2d'} value={height} onChange={e=>setHeight(Number(e.target.value))} />
+      <aside className="hp-sidebar"><p className="hp-kicker">YOUR HOME, REIMAGINED</p><h1>One place.<br />Every perspective.</h1><p className="hp-intro">Your measured layout, now with a photo-inspired exterior and garden.</p>
+        <div className="hp-status"><i /> CONCEPT 02 <span>SKETCH + PHOTOGRAPHS</span></div>
+        <section><h2>Explore your plan</h2><div className="hp-modes"><button aria-pressed={mode==='2d'} onClick={()=>setMode('2d')}>▤ 2D plan</button><button aria-pressed={mode==='3d'} onClick={()=>setMode('3d')}>◇ Cutaway</button><button aria-pressed={mode === 'exterior'} onClick={()=>setMode('exterior')}>▧ Exterior</button></div>
+          <label className={mode === 'exterior' ? 'muted' : ''}>Space labels<input disabled={mode === 'exterior'} type="checkbox" checked={labels} onChange={e=>setLabels(e.target.checked)} /></label>
+          <label className={mode!=='3d'?'muted':''}>Furniture <input type="checkbox" disabled={mode!=='3d'} checked={furniture} onChange={e=>setFurniture(e.target.checked)} /></label>
+          <label className={mode!=='3d'?'muted':''}>Show roofs<input type="checkbox" disabled={mode!=='3d'} checked={roof} onChange={e=>setRoof(e.target.checked)} /></label>
+          <label htmlFor="hp-height" className={mode!=='3d'?'muted':''}>Wall display height<span>{height===3?'Cutaway':height>3?'Tall':'Low'}</span></label><input id="hp-height" aria-label="Wall display height" type="range" min="1" max="7" step="0.5" disabled={mode!=='3d'} value={height} onChange={e=>setHeight(Number(e.target.value))} />
         </section>
         <section><h2>Spaces <span>{zones.length}</span></h2><div className="hp-directory">{zones.map(z=><button key={z.id} aria-pressed={selected===z.id} onClick={()=>setSelected(z.id)}><i style={{background:colors[z.type]}} />{z.name}<span>↗</span></button>)}</div></section>
-        <div className="hp-assumption"><strong>1,100 sq ft · assumed 22 × 50 ft</strong><p>Bedrooms, kitchen, porch, hall, cow house, and small old room use your dimensions. The bungalow includes the porch. The remaining area is provisional circulation and unassigned space. Middle old house: 30 × 15 ft (450 sq ft), confirmed.</p></div>
+        <div className="hp-assumption"><strong>1,100 sq ft · assumed 22 × 50 ft</strong><p>Bedrooms, kitchen, porch, hall, cow house, and small old room use your dimensions. The bungalow includes the porch. The remaining area is provisional circulation and unassigned space. Middle old house: 30 × 15 ft (450 sq ft), confirmed.</p><p>Exterior colors, terrace edges, grilles, and raised beds follow your photos. Heights, older roof forms, planting, and exact facade positions are illustrative. The aerial photo is not a measured site survey.</p></div>
       </aside>
       <div className="hp-stage">
-        <div className="hp-toolbar"><div><span className="hp-live" /> {mode==='2d'?'GROUND FLOOR / SITE PLAN':'SITE / PERSPECTIVE'}</div><button onClick={()=>setReset(v=>v+1)}>↻ Reset view</button></div>
+        <div className="hp-toolbar"><div><span className="hp-live" /> {mode==='2d'?'GROUND FLOOR / SITE PLAN':mode==='exterior'?'PHOTO STUDY / EXTERIOR':'SITE / CUTAWAY'}</div><button onClick={()=>setReset(v=>v+1)}>↻ Reset view</button></div>
         {mode === '2d' && <div className="hp-compass"><span>N</span><strong>↑</strong></div>}
         <Canvas shadows dpr={[1,2]} fallback={<p>WebGL is required to view the plan. The original sketch and room directory remain available.</p>}>
           <color attach="background" args={['#edece5']} /><ambientLight intensity={1.6} /><directionalLight position={[-25,65,35]} intensity={2.2} castShadow shadow-mapSize={[2048,2048]} shadow-camera-left={-65} shadow-camera-right={65} shadow-camera-top={65} shadow-camera-bottom={-65} shadow-normalBias={0.06} />
-          <Camera key={mode+reset} flat={mode==='2d'} />
-          <Scene flat={mode==='2d'} labels={labels && !(mode==='3d'&&roof)} furniture={furniture} roof={roof} height={height} selected={selected} select={setSelected} />
-          <OrbitControls key={mode+reset} makeDefault target={[0,0,4]} enableRotate={mode==='3d'} minZoom={2} maxZoom={30} maxPolarAngle={Math.PI/2.1} />
+          <Camera exterior={mode === 'exterior'} key={mode+reset} flat={mode==='2d'} />
+          {mode === 'exterior' ? <HouseExterior /> : <Scene flat={mode==='2d'} labels={labels && !(mode==='3d'&&roof)} furniture={furniture} roof={roof} height={height} selected={selected} select={setSelected} />}
+          <OrbitControls key={mode+reset} makeDefault target={[0,0,4]} enableRotate={mode!=='2d'} minZoom={2} maxZoom={30} maxPolarAngle={Math.PI/2.1} />
         </Canvas>
         {zone&&<div className="hp-selection"><div><span>SELECTED SPACE</span><button onClick={()=>setSelected(null)} aria-label="Clear selection">×</button></div><h2>{zone.name}</h2><p>{zone.note}</p><small>{zone.measured ? zone.w + " × " + zone.d + " ft · " + (zone.w*zone.d) + " sq ft · supplied dimensions" : "Provisional geometry · confirm measurements"}</small></div>}
-        <div className="hp-legend"><span><i style={{background:colors.home}} />Main house</span><span><i style={{background:colors.existing}} />Existing</span><span><i style={{background:colors.utility}} />Utility</span><span><i style={{background:colors.outdoor}} />Garden / outdoor</span><span><i style={{background:'#729b9f'}} />Window</span></div>
-        <div className="hp-stage-footer"><span>{mode==='2d'?'Right-drag to pan':'Drag to orbit'} · Scroll to zoom · Select a space</span><span>ROOMS IN FEET · SITE BOUNDARY ASSUMED</span></div>
+        {mode === 'exterior' ? <div className="hp-legend"><span><i style={{background:'#d8d0bc'}} />Cream render</span><span><i style={{background:'#a74e42'}} />Red trim</span><span><i style={{background:'#857964'}} />Raised stone beds</span><span>PHOTO-INSPIRED · HEIGHTS APPROXIMATE</span></div> : (<div className="hp-legend"><span><i style={{background:colors.home}} />Main house</span><span><i style={{background:colors.existing}} />Existing</span><span><i style={{background:colors.utility}} />Utility</span><span><i style={{background:colors.outdoor}} />Garden / outdoor</span><span><i style={{background:'#729b9f'}} />Window</span></div>)}
+        <div className="hp-stage-footer"><span>{mode==='2d'?'Right-drag to pan':'Drag to orbit'} · Scroll to zoom {mode !== 'exterior' && '· Select a space'}</span><span>ROOMS IN FEET · SITE BOUNDARY ASSUMED</span></div>
       </div>
     </div>
     {sketch&&<Sketch close={()=>setSketch(false)} />}
   </div>
 }
+
+
 
 
 
