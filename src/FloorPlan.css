@@ -1,0 +1,68 @@
+.plan-page { background: #f5f4ef; color: #303b32; min-height: 100svh; }
+.plan-header { height: 76px; padding: 0 32px; border-bottom: 1px solid #ddded4; background: #f9f8f4; }
+.plan-header a { color: #334437; text-decoration: none; font-size: 12px; }
+.plan-header .plan-brand { font-size: 14px; letter-spacing: .12em; font-weight: 700; }
+.plan-brand span { color: #909a8c; font-weight: 400; }
+.plan-project { font-size: 10px; letter-spacing: .13em; display: flex; align-items: center; gap: 16px; color: #7e8779; }
+.plan-project i, .viewport-heading i { display: inline-block; width: 6px; height: 6px; background: #708966; border-radius: 50%; }
+.plan-layout { display: grid; grid-template-columns: 320px minmax(0,1fr); }
+.plan-sidebar { padding: 34px 28px 22px; height: calc(100svh - 76px); overflow-y: auto; border-right: 1px solid #ddded4; }
+.plan-kicker { font-size: 9px; letter-spacing: .15em; color: #7a8874; font-weight: 600; }
+.plan-sidebar h1 { font-family: Georgia, serif; font-size: 40px; font-weight: 400; line-height: 1.1; letter-spacing: -.05em; margin: 18px 0; }
+.plan-description { color: #858a7d; font-size: 12px; line-height: 1.7; }
+.plan-stats { display: flex; gap: 42px; padding: 23px 0; border-bottom: 1px solid #ddded4; }
+.plan-stats strong { display: block; font-size: 24px; font-weight: 400; }
+.plan-stats span { display: block; margin-top: 6px; font-size: 8px; letter-spacing: .12em; color: #929889; }
+.plan-section { padding: 22px 0; border-bottom: 1px solid #ddded4; }
+.plan-section h2 { font-size: 12px; font-weight: 600; margin: 0 0 16px; display: flex; justify-content: space-between; }
+.plan-section h2 span { color: #8b9381; font-weight: 400; }
+.plan-page button { color: #4b5946; background: transparent; border-color: #d6dacd; font-size: 11px; }
+.plan-page button:hover { background: #e3e8db; }
+.plan-page button:focus-visible, .plan-page a:focus-visible, .plan-page input:focus-visible { outline: 2px solid #59734c; outline-offset: 3px; }
+.view-switch { display: flex; background: #e9ebe3; padding: 4px; border-radius: 8px; margin-bottom: 18px; }
+.view-switch button { border: 0; padding: 9px 5px; }
+.view-switch button[aria-pressed=true] { background: #fafaf5; box-shadow: 0 1px 4px #28372012; color: #334e2c; }
+.plan-toggle { display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin: 14px 0; }
+.plan-page input[type=checkbox] { accent-color: #617653; }
+.height-label { display: flex; justify-content: space-between; margin-top: 20px; font-size: 12px; }
+.height-label span { color: #8c947e; }
+.plan-page input[type=range] { width: 100%; accent-color: #617653; margin: 14px 0 0; }
+.room-directory { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.room-directory button { display: flex; align-items: center; text-align: left; padding: 9px 5px; gap: 6px; font-size: 10px; border: 1px solid transparent; }
+.room-directory button[aria-pressed=true] { background: #e0e7d7; border-color: #abb89c; }
+.room-directory i { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
+.room-directory span { margin-left: auto; color: #99a28c; }
+.reference-button { margin-top: 20px; }
+.plan-note { color: #989e90; line-height: 1.6; font-size: 10px; margin: 16px 0 0; }
+.plan-viewport { position: relative; height: calc(100svh - 76px); min-height: 540px; overflow: hidden; }
+.viewport-heading { position: absolute; top: 25px; left: 28px; right: 28px; z-index: 30; display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
+.viewport-heading span { font-size: 9px; letter-spacing: .16em; display: flex; align-items: center; gap: 8px; }
+.viewport-heading button { width: auto; background: #f8f9f2c9; pointer-events: auto; }
+.room-tag { white-space: nowrap; width: auto; padding: 4px 7px !important; background: #f9faf1dc !important; border: 1px solid #ced3c480 !important; border-radius: 4px; font-size: 9px !important; box-shadow: 0 2px 8px #2633230a; }
+.room-tag.active { background: #e6c98d !important; border-color: #b28d46 !important; }
+.dimension { white-space: nowrap; font-size: 9px; color: #778371; letter-spacing: .12em; pointer-events: none; }
+.viewport-footer { position: absolute; bottom: 20px; left: 28px; right: 28px; display: flex; justify-content: space-between; gap: 15px; font-size: 9px; color: #87917c; pointer-events: none; }
+.viewport-footer b { margin: 0 7px; font-weight: 400; }
+.room-detail { position: absolute; bottom: 58px; left: 28px; display: flex; justify-content: space-between; gap: 45px; padding: 18px 20px; background: #fafbf5ef; border: 1px solid #d8dece; border-radius: 10px; z-index: 30; box-shadow: 0 8px 24px #3a442213; }
+.room-detail span { display: block; font-size: 8px; letter-spacing: .13em; color: #8a947e; }
+.room-detail strong { display: block; font-size: 19px; font-weight: 500; margin-top: 8px; }
+.room-detail p { font-size: 12px; margin: 6px 0 0; color: #818b76; }
+.room-detail button { width: 25px; padding: 0; align-self: flex-start; border: 0; font-size: 20px; }
+.reference-overlay { position: fixed; inset: 0; background: #25302588; z-index: 100; display: grid; place-items: center; padding: 20px; backdrop-filter: blur(5px); }
+.reference-overlay section { background: #fafbf5; padding: 24px; border-radius: 14px; max-height: 95svh; overflow: auto; width: min(410px,100%); }
+.reference-overlay section > div { display: flex; align-items: center; justify-content: space-between; }
+.reference-overlay h2 { font-size: 16px; font-weight: 500; }
+.reference-overlay button { width: 32px; font-size: 20px; padding: 0; }
+.reference-overlay img { display: block; max-width: 100%; max-height: 65svh; margin: 10px auto; }
+.reference-overlay p { text-align: center; font-size: 10px; color: #87917c; }
+.webgl-fallback { padding: 100px 30px; }
+@media (max-width: 1000px) { .plan-layout { grid-template-columns: 270px minmax(0,1fr); } .plan-sidebar { padding: 28px 20px; } .plan-project { display: none; } .viewport-footer { flex-direction: column; } }
+@media (max-width: 700px) { .plan-header { padding: 0 18px; height: 64px; } .plan-header .plan-brand { font-size: 11px; } .plan-layout { display: flex; flex-direction: column-reverse; } .plan-viewport { height: 65svh; min-height: 460px; } .plan-sidebar { height: auto; overflow: visible; border-right: 0; } .plan-sidebar h1 br { display: none; } .plan-sidebar h1 { font-size: 32px; } .plan-stats { gap: 60px; } .room-directory { grid-template-columns: repeat(3,1fr); } .viewport-heading { top: 16px; left: 16px; right: 16px; } .viewport-footer { left: 16px; right: 16px; font-size: 8px; } .room-tag { font-size: 8px !important; padding: 3px 4px !important; } }
+
+.reference-dialog { background: #fafbf5; color: #303b32; border: 1px solid #d8dece; padding: 24px; border-radius: 14px; max-height: 95svh; width: min(410px,90vw); }
+.reference-dialog::backdrop { background: #25302588; backdrop-filter: blur(5px); }
+.reference-dialog > div { display: flex; justify-content: space-between; align-items: center; }
+.reference-dialog h2 { font-size: 16px; font-weight: 500; }
+.reference-dialog button { width: 32px; padding: 0; font-size: 20px; color: #4b5946; background: transparent; border-color: #d6dacd; }
+.reference-dialog img { display: block; max-width: 100%; max-height: 65svh; margin: 10px auto; }
+.reference-dialog p { text-align: center; font-size: 10px; color: #87917c; }

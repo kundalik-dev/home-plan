@@ -1,0 +1,71 @@
+.hp-page { background: #f8f7f2; color: #344234; min-height: 100svh; font-family: 'Segoe UI',sans-serif; }
+.hp-header { height: 74px; padding: 0 32px; border-bottom: 1px solid #dedfd4; }
+.hp-header a { color: #344234; text-decoration: none; font-size: 12px; }
+.hp-header .hp-brand { font-weight: 700; font-size: 15px; letter-spacing: .1em; }
+.hp-brand span { font-size: 9px; margin-left: 22px; color: #8d9583; font-weight: 400; letter-spacing: .15em; }
+.hp-header nav { display: flex; align-items: center; gap: 24px; }
+.hp-page button { background: transparent; color: #52604b; border-color: #d4d8ca; font-size: 11px; }
+.hp-page button:hover { background: #e5eadc; }
+.hp-page button:focus-visible, .hp-page a:focus-visible, .hp-page input:focus-visible { outline: 2px solid #57704a; outline-offset: 3px; }
+.hp-header button { width: auto; padding: 9px 14px; }
+.hp-layout { display: grid; grid-template-columns: 310px minmax(0,1fr); }
+.hp-sidebar { height: calc(100svh - 74px); overflow-y: auto; padding: 34px 26px 26px; border-right: 1px solid #dedfd4; }
+.hp-kicker { font-size: 9px; letter-spacing: .16em; color: #8e987f; }
+.hp-sidebar h1 { font-family: Georgia,serif; font-size: 37px; line-height: 1.1; font-weight: 400; letter-spacing: -.05em; margin: 18px 0; }
+.hp-intro { color: #8b9482; font-size: 12px; line-height: 1.8; }
+.hp-status { font-size: 8px; letter-spacing: .1em; display: flex; align-items: center; gap: 7px; margin-top: 24px; padding-bottom: 24px; border-bottom: 1px solid #dde1d3; }
+.hp-status i,.hp-live { width: 6px; height: 6px; display: inline-block; border-radius: 50%; background: #839974; }
+.hp-status span { margin-left: auto; color: #9aa18f; font-size: 7px; }
+.hp-sidebar section { padding: 24px 0; border-bottom: 1px solid #dde1d3; }
+.hp-sidebar h2 { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin: 0 0 18px; }
+.hp-sidebar h2 span { color: #9aa18f; }
+.hp-modes { display: flex; gap: 4px; padding: 4px; background: #e9ece2; border-radius: 8px; margin-bottom: 20px; }
+.hp-modes button { border: 0; }
+.hp-modes button[aria-pressed=true] { background: #fcfcf7; box-shadow: 0 2px 5px #34452212; }
+.hp-sidebar label { display: flex; align-items: center; justify-content: space-between; font-size: 11px; margin: 14px 0; }
+.hp-sidebar input[type=checkbox] { accent-color: #71865e; }
+.hp-sidebar input[type=range] { width: 100%; accent-color: #71865e; }
+.hp-sidebar label span { color: #9da48f; font-size: 10px; }
+.hp-sidebar .muted { opacity: .5; }
+.hp-directory { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.hp-directory button { padding: 8px 4px; border: 1px solid transparent; display: flex; gap: 6px; align-items: center; text-align: left; font-size: 9px; }
+.hp-directory i,.hp-legend i { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; display: inline-block; }
+.hp-directory button span { margin-left: auto; color: #a5ad9a; }
+.hp-directory button[aria-pressed=true] { border-color: #b6c3a6; background: #e2e9d8; }
+.hp-assumption { background: #eeefe6; border-radius: 8px; padding: 14px; margin-top: 22px; }
+.hp-assumption strong { font-size: 10px; font-weight: 500; }
+.hp-assumption p { font-size: 10px; line-height: 1.7; color: #929b87; margin-bottom: 0; }
+.hp-stage { height: calc(100svh - 74px); min-height: 550px; position: relative; overflow: hidden; }
+.hp-toolbar { position: absolute; z-index: 30; top: 23px; left: 28px; right: 28px; display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
+.hp-toolbar > div { font-size: 9px; letter-spacing: .13em; }
+.hp-toolbar .hp-live { margin-right: 8px; }
+.hp-toolbar button { width: auto; background: #fafbf5c9; pointer-events: auto; }
+.hp-compass { position: absolute; right: 30px; top: 85px; z-index: 30; text-align: center; color: #66765c; pointer-events: none; }
+.hp-compass span { font-size: 10px; display: block; }
+.hp-compass strong { font-size: 29px; font-weight: 300; }
+.hp-label { white-space: nowrap; font-size: 9px !important; padding: 4px 6px !important; width: auto; border: 1px solid #dedfd3a0 !important; background: #fbfcf4e0 !important; border-radius: 3px; }
+.hp-label.selected { background: #e9c789 !important; border-color: #ba985d !important; }
+.hp-courtyard { font-size: 9px; letter-spacing: .16em; color: #9c9f8f; white-space: nowrap; pointer-events: none; }
+.hp-entry { font-size: 9px; letter-spacing: .08em; color: #67785a; white-space: nowrap; }
+.hp-legend { position: absolute; bottom: 50px; left: 28px; right: 28px; display: flex; justify-content: center; gap: 20px; pointer-events: none; }
+.hp-legend span { display: flex; align-items: center; gap: 6px; font-size: 8px; color: #8b9580; }
+.hp-stage-footer { position: absolute; bottom: 20px; left: 28px; right: 28px; display: flex; justify-content: space-between; gap: 12px; font-size: 8px; color: #929b87; pointer-events: none; }
+.hp-selection { position: absolute; left: 24px; bottom: 95px; z-index: 30; background: #fcfcf5f5; border: 1px solid #d8decd; padding: 17px 20px; border-radius: 10px; width: 245px; box-shadow: 0 8px 30px #34432510; }
+.hp-selection > div { display: flex; justify-content: space-between; align-items: center; }
+.hp-selection span { font-size: 8px; letter-spacing: .15em; color: #9ba58c; }
+.hp-selection button { border: 0; width: auto; padding: 0 4px; font-size: 18px; }
+.hp-selection h2 { font-size: 20px; font-weight: 500; margin: 8px 0; }
+.hp-selection p { font-size: 11px; color: #849178; line-height: 1.6; }
+.hp-selection small { font-size: 8px; color: #a1a995; }
+.hp-dialog { background: #fafbf5; color: #344234; border: 1px solid #d7decc; border-radius: 14px; padding: 24px; width: min(950px,92vw); max-height: 92svh; }
+.hp-dialog::backdrop { background: #24312288; backdrop-filter: blur(5px); }
+.hp-dialog > div { display: flex; justify-content: space-between; align-items: center; }
+.hp-dialog h2 { font-size: 17px; font-weight: 500; }
+.hp-dialog button { width: 32px; padding: 0; background: transparent; color: #52604b; font-size: 23px; }
+.hp-dialog img { width: 100%; max-height: 70svh; object-fit: contain; }
+.hp-dialog p { font-size: 11px; color: #8c967f; }
+@media(max-width:1050px) { .hp-layout { grid-template-columns: 265px minmax(0,1fr); } .hp-sidebar { padding: 28px 20px; } .hp-sidebar h1 { font-size: 32px; } .hp-brand span { display: none; } .hp-legend { gap: 12px; } }
+@media(max-width:700px) { .hp-header { height: 64px; padding: 0 16px; } .hp-header .hp-brand { font-size: 11px; } .hp-header nav { gap: 12px; } .hp-header nav a { font-size: 10px; } .hp-header button { font-size: 9px; padding: 8px; } .hp-layout { display: flex; flex-direction: column-reverse; } .hp-stage { height: 65svh; min-height: 470px; } .hp-sidebar { height: auto; overflow: visible; border: 0; } .hp-toolbar { left: 15px; right: 15px; top: 16px; } .hp-toolbar > div { font-size: 8px; } .hp-label { font-size: 7px !important; padding: 2px 3px !important; } .hp-legend { flex-wrap: wrap; gap: 8px 12px; bottom: 48px; } .hp-stage-footer { left: 15px; right: 15px; font-size: 7px; } .hp-compass { right: 18px; top: 72px; } .hp-selection { width: 210px; left: 15px; bottom: 95px; padding: 12px; } .hp-directory { grid-template-columns: repeat(3,1fr); } .hp-courtyard,.hp-entry { font-size: 7px; } }
+
+.hp-label small { display: block; font-size: 8px; font-weight: 400; color: #849078; margin-top: 2px; }
+@media(max-width:700px) { .hp-label small { font-size: 6px; } }

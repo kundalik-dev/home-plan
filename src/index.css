@@ -1,0 +1,24 @@
+:root { font-family: 'Segoe UI', sans-serif; color: #eef0e9; background: #141715; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+main { min-height: 100svh; display: flex; flex-direction: column; padding: 32px 5vw; }
+header, footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+header { padding-bottom: 25px; border-bottom: 1px solid #ffffff18; }
+.brand { font-size: 15px; font-weight: 700; letter-spacing: .16em; }
+.badge { color: #b6f36a; font-size: 12px; border: 1px solid #b6f36a40; padding: 8px 12px; border-radius: 30px; }
+.workspace { position: relative; flex: 1; display: grid; grid-template-columns: 1fr 1.8fr; align-items: center; min-height: 740px; }
+.intro { z-index: 1; pointer-events: none; padding-bottom: 170px; }
+.eyebrow { color: #b6f36a; letter-spacing: .18em; font-size: 10px; font-weight: 600; }
+h1 { font-size: clamp(44px, 5.5vw, 82px); line-height: 1.05; letter-spacing: -.06em; font-weight: 500; margin: 24px 0; }
+.intro > p:last-child { color: #a0a69e; line-height: 1.8; font-size: 14px; }
+.scene { height: 620px; min-width: 0; touch-action: none; }
+.controls { position: absolute; bottom: 35px; left: 0; width: 240px; border: 1px solid #ffffff1c; background: #1c201d; border-radius: 14px; padding: 20px; }
+.controls .eyebrow { margin: 0 0 18px; color: #8b938a; }
+.row { display: flex; justify-content: space-between; align-items: center; margin: 16px 0; font-size: 12px; }
+input[type=color] { width: 28px; height: 26px; padding: 0; border: 0; background: none; cursor: pointer; }
+input[type=checkbox] { accent-color: #b6f36a; width: 16px; height: 16px; cursor: pointer; }
+button { width: 100%; padding: 10px; border: 1px solid #ffffff25; border-radius: 7px; background: #2c342a; color: #dce7d4; font: inherit; font-size: 12px; cursor: pointer; }
+button:hover { background: #3b4735; }
+button:focus-visible, input:focus-visible { outline: 2px solid #b6f36a; outline-offset: 4px; }
+footer { border-top: 1px solid #ffffff18; padding-top: 22px; color: #8b938a; font-size: 11px; }
+@media (max-width: 760px) { main { padding: 24px; } .workspace { display: flex; flex-direction: column; align-items: stretch; min-height: auto; } .intro { padding: 40px 0 0; } h1 { margin: 16px 0; } .scene { height: 360px; } .controls { position: static; width: 100%; margin-bottom: 30px; } footer { align-items: flex-start; font-size: 10px; } .badge { font-size: 10px; } }
